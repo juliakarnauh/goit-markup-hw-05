@@ -12,10 +12,14 @@
     --header-footer-color:#2F303A;
     --background-color:#F5F4FA;
     --project--color:#F5F5F5;
+    --transition-dir: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 body {
 font-family: 'Roboto', sans-serif;
 letter-spacing: 0.03em;
+}
+img{
+    display: block;
 }
 .list{
     list-style-type: none;
@@ -63,8 +67,14 @@ font-size: 14px;
 line-height: 1.14;
 padding-bottom: 32px;
 padding-top: 32px;
+transition: color var(--transition-dir);
+}
+.menu .link:hover,
+.menu .link:focus{
+    color:var(--accent-color);
 }
 .active{
+    position: relative;
     display: inline-block;
 color: var(--accent-color);
 font-weight: 500;
@@ -73,10 +83,18 @@ line-height: 1.14;
 padding-bottom: 32px;
 padding-top: 32px;
 }
-.menu .link:hover,
-.menu .link:focus{
-    color:var(--accent-color);
-}
+
+.active::after {
+    position: absolute;
+  bottom: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 4px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+  }
+
 
 .contact{
     display: flex;
@@ -93,12 +111,14 @@ padding-top: 32px;
 padding-bottom: 32px;}
 
 .contact-icon{
-    fill: #757575;
+    fill: var(--primary-text-color);
     color: var(--primary-text-color);
+    transition: fill var(--transition-dir),
+    color var(--transition-dir);
 }
 .contact-icon:hover,
 .contact-icon:focus{
-    fill: #2196F3;
+    fill: var(--accent-color);
     color: var(--accent-color);
 }
 .evelope,
@@ -133,7 +153,7 @@ padding-bottom: 32px;}
 font-size: 44px;
 line-height: 1.36;
 text-transform: uppercase;
-letter-spacing: 0.03em;
+letter-spacing: 0.06em;
 }
 .hero .btn{
     display: inline-block;
@@ -149,8 +169,45 @@ letter-spacing: 0.03em;
     min-height: 50px;
 line-height: 1.87;
 margin-top: 30px;
-letter-spacing: 0.03em;
+letter-spacing: 0.06em;
 } 
+.backdrop{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100%;
+    background-color:  rgba(0, 0, 0, 0.2);
+    transition: transform  var(--transition-dir);
+}
+.backdrop.is-hidden{
+    opacity: 0;
+    pointer-events: none;
+}
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 581px;
+    width: 528px;
+    background-color: var(--occasional-color);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+border-radius: 4px;
+}
+.modal-btn{
+    position: absolute;
+    top:12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    min-height: 30px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
 
 .box-work{
     background-color: var(--occasional-color) ;
@@ -205,6 +262,9 @@ font-size: 14px;
 line-height: 1.7;
 color:var(--primary-text-color);
 }
+.work-block{
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+}
 .work .caption{
 font-weight: 700;
 font-size: 36px;
@@ -221,6 +281,25 @@ margin-bottom: 50px;
     display:block;
     max-height: 295px;
 }
+.work-img{
+    position: relative;
+}
+
+.work-text{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 70px;
+    background: rgba(47, 48, 58, 0.8);
+    color: var(--occasional-color);
+    letter-spacing: 0.03em;
+text-transform: uppercase;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
 .worker{
     background-color:var(--background-color);
 }
@@ -276,10 +355,11 @@ color:var(--primary-text-color);
     justify-content: center;
     align-items: center;
     fill:#AFB1B8;
+    transition: background-color var(--transition-dir),  fill var(--transition-dir), border-radius var(--transition-dir);
 }
 .media-icon:hover,
 .media-icon:focus{
-    background-color: #2196F3;
+    background-color: var(--accent-color);
     fill:#FFFFFF;
     border-radius: 50%;
 }
@@ -311,11 +391,12 @@ height: 100%;
 border-radius: 4px;
 border: 1px solid #AFB1B8;
 fill: #AFB1B8;
+transition: border var(--transition-dir), fill var(--transition-dir);
 }
 .client-icon:hover,
 .client-icon:focus{
-    border: 1px solid #2196F3;
-    fill: #2196F3;
+    border: 1px solid var(--accent-color);
+    fill: var(--accent-color);
 }
 
 .footer-navigation{
@@ -364,6 +445,7 @@ font-size: 14px;
 line-height: 1.7;
 color: rgba(255, 255, 255, 0.6);
 margin-top: 9px;
+transition: color var(--transition-dir);
 }
 .adress .cont:hover,
 .adress .cont:focus{
@@ -404,11 +486,12 @@ align-items: center;
     width: 100%;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
-    fill:#FFFFFF;
+    fill:var(--occasional-color);
+    transition: background-color var(--transition-dir);
 }
 .footer-apps:hover,
 .footer-apps:focus{
-    background-color: #2196F3;
+    background-color: var(--accent-color);
 }
 
 .aside .button{
@@ -425,12 +508,14 @@ align-items: center;
 line-height: 1.6;
 padding: 6px 23px;
 margin-right: 8px;
+transition:background-color var(--transition-dir), color var(--transition-dir), box-shadow var(--transition-dir) ;
 }
 
 .aside .button:hover,
 .aside .button:focus{
     background-color:var(--accent-color);
     color:var(--occasional-color);
+    box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 .project{
     display:flex;
@@ -444,9 +529,30 @@ margin-right: 8px;
     width: 370px;
     background-color: var(--occasional-color);
 }
+
 .project-box{
     display: block;
+    position: relative;
+    width: 100%; 
+ transition: box-shadow var(--transition-dir), opacity var(--transition-dir);
+
+}
+
+
+.project-box:hover .prodject-text{
+  top: 0;
+}
+.prodject-text{
+    position: absolute;
+    background-color: var(--accent-color);
     width: 100%;
+    height: 100%;
+    opacity: 0.9;
+    top: 100%;
+    left: 0;
+    color: var(--occasional-color);
+    padding: 63px 24px;
+    transition: top var(--transition-dir);
 }
 .project-box:hover,
 .project-box:focus{
@@ -458,8 +564,9 @@ margin-right: 8px;
 }
 .picture{
     display: block;
+    position: relative;
     max-height: 294px;
-}
+overflow: hidden;}
 .kub .subtitle{
 font-weight: 700;
 font-size: 18px;
